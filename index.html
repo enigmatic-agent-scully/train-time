@@ -13,7 +13,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEUlty"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </head>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="card-body">
                     <table class="table">
-                        <thead >
+                        <thead>
                             <tr>
                                 <th scope="col" class="font-weight-light">Train Name</th>
                                 <th scope="col" class="font-weight-light">Destination</th>
@@ -75,8 +75,8 @@
                             <input type="text" class="form-control" id="destination">
                         </div>
                         <div class="form-group">
-                            <label for="start">First Train Time (HH:mm - Military Time)</label>
-                            <input type="text" class="form-control" id="start">
+                            <label for="start">First Train Time</label>
+                            <input type="time" class="form-control" id="start" min="00:00:00" max = "23:59:59" required>
                         </div>
                         <div class="form-group">
                             <label for="frequency">Frequency</label>
@@ -105,13 +105,12 @@
         firebase.initializeApp(config);
 
         var database = firebase.database();
-        var now = moment().format('LTS');
-        var train = "";
-        var dest = "";
-        var start = "";
-        var freq = "";
-
-
+        var now = moment().format("HH:mm");
+        var train;
+        var dest;
+        var start;
+        var freq;
+        var time;
 
         $("#go").on("click", function (event) {
             event.preventDefault();
@@ -121,11 +120,11 @@
             console.log(dest);
             start = $("#start").val().trim();
             console.log(start);
-            var time = moment(start);
+            time = moment(start);
             console.log(time);
             freq = $("#frequency").val();
             console.log(freq);
-            now = moment().format('LTS');
+            now = moment().format("HH:mm");
             console.log(now);
 
             var trainData = {
@@ -135,14 +134,15 @@
                 freq: freq,
                 now: now,
             }
-            database.ref().push(trainData);
 
+            database.ref().push(trainData);
+            
             document.getElementById("form").reset();
             return false;
         });
 
         database.ref().on("child_added", function (childSnapshot) {
-            now = moment().format('LTS');
+            now = moment().format("HH:mm");
             console.log(childSnapshot.val().train);
             console.log(childSnapshot.val().dest);
             console.log(childSnapshot.val().start);
@@ -155,13 +155,12 @@
                 <td id="frequency">${childSnapshot.val().freq}</td>
                 <td id="next-arrival"></td>
                 <td id="minutes-away"></td></tr>`);
-
         },
             function (errorObject) {
                 console.log("Errors handed:" + errorObject.code);
             });
 
-
+        
 
     </script>
 
@@ -169,3 +168,4 @@
 </body>
 
 </html>
+
