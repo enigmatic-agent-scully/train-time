@@ -76,7 +76,7 @@
                         </div>
                         <div class="form-group">
                             <label for="start">First Train Time</label>
-                            <input type="time" class="form-control" id="start" min="00:00:00" max = "23:59:59" required>
+                            <input type="time" class="form-control" id="start" min="00:00:00" max="23:59:59" required>
                         </div>
                         <div class="form-group">
                             <label for="frequency">Frequency</label>
@@ -91,81 +91,9 @@
         </div>
     </div>
 
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyAMcV07MCzpWAe4zCJK9Es2h94CTRnKuc4",
-            authDomain: "fir-project-1-d4265.firebaseapp.com",
-            databaseURL: "https://fir-project-1-d4265.firebaseio.com",
-            projectId: "fir-project-1-d4265",
-            storageBucket: "fir-project-1-d4265.appspot.com",
-            messagingSenderId: "315625469189"
-        };
-
-        firebase.initializeApp(config);
-
-        var database = firebase.database();
-        var now = moment().format("HH:mm");
-        var train;
-        var dest;
-        var start;
-        var freq;
-        var time;
-
-        $("#go").on("click", function (event) {
-            event.preventDefault();
-            train = $("#train").val().trim();
-            console.log(train);
-            dest = $("#destination").val().trim();
-            console.log(dest);
-            start = $("#start").val().trim();
-            console.log(start);
-            time = moment(start);
-            console.log(time);
-            freq = $("#frequency").val();
-            console.log(freq);
-            now = moment().format("HH:mm");
-            console.log(now);
-
-            var trainData = {
-                train: train,
-                dest: dest,
-                start: start,
-                freq: freq,
-                now: now,
-            }
-
-            database.ref().push(trainData);
-            
-            document.getElementById("form").reset();
-            return false;
-        });
-
-        database.ref().on("child_added", function (childSnapshot) {
-            now = moment().format("HH:mm");
-            console.log(childSnapshot.val().train);
-            console.log(childSnapshot.val().dest);
-            console.log(childSnapshot.val().start);
-            console.log(childSnapshot.val().freq);
-            console.log(childSnapshot.val().now);
-
-            $("tbody").append(`<tr>
-                <td id="train">${childSnapshot.val().train}</td>
-                <td id="destination">${childSnapshot.val().dest}</td>
-                <td id="frequency">${childSnapshot.val().freq}</td>
-                <td id="next-arrival"></td>
-                <td id="minutes-away"></td></tr>`);
-        },
-            function (errorObject) {
-                console.log("Errors handed:" + errorObject.code);
-            });
-
-        
-
-    </script>
+    <script src="assets/javascript/choochoo.js"></script>
 
 
 </body>
 
 </html>
-
