@@ -1,4 +1,6 @@
-// Initialize Firebase
+
+// Still haven't solved the mystery problem!
+
 $(document).ready(function () {
     var config = {
         apiKey: "AIzaSyAMcV07MCzpWAe4zCJK9Es2h94CTRnKuc4",
