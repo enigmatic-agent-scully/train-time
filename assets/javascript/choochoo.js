@@ -73,11 +73,11 @@ $(document).ready(function () {
         nextTrain = moment(nextTrain).format("hh:mm a");
 
         $("tbody").append(`<tr>
-                <td id="train">${train}</td>
-                <td id="destination">${dest}</td>
-                <td id="frequency">${freq}</td>
-                <td id="next-arrival">${nextTrain}</td>
-                <td id="minutes-away">${minTillTrain}</td></tr>`);
+                <td>${train}</td>
+                <td>${dest}</td>
+                <td>${freq}</td>
+                <td>${nextTrain}</td>
+                <td>${minTillTrain}</td></tr>`);
     },
         function (errorObject) {
             console.log("Errors handed:" + errorObject.code);
