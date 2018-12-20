@@ -1,103 +1,134 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta train="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta train="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Train Time</title>
     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEUlty"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <style>
       #headerimg {
-      background-image: url("assets/images/train-tracks.jpg") !important; background-size: cover; 
-      height: 100%;
+        background-image: url('assets/images/train-tracks.jpg') !important;
+        background-size: cover;
+        height: 100%;
       }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="row">
-        <div class="col-sm-1">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <div
+          class="jumbotron text-light bg-info text-center img-fluid"
+          id="headerimg"
+        >
+          <h1>When's the Next Train?</h1>
         </div>
-        <div class="col-sm-10">
-            <div class="jumbotron text-light bg-info text-center img-fluid" id="headerimg">
-                <h1>When's the Next Train?</h1>
-            </div>
-        </div>
-        <div class="col-sm-1">
-        </div>
+      </div>
+      <div class="col-sm-1"></div>
     </div>
     <div class="row">
-        <div class="col-sm-1">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <div class="card">
+          <div class="card-header bg-info text-light font-weight-bold">
+            Current Train Schedule
+          </div>
+          <div class="card-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="font-weight-light">Train Name</th>
+                  <th scope="col" class="font-weight-light">Destination</th>
+                  <th scope="col" class="font-weight-light">
+                    Frequency (minutes)
+                  </th>
+                  <th scope="col" class="font-weight-light">Next Arrival</th>
+                  <th scope="col" class="font-weight-light">Minutes Away</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
-        <div class="col-sm-10">
-            <div class="card">
-                <div class="card-header bg-info text-light font-weight-bold">
-                    Current Train Schedule
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="font-weight-light">Train Name</th>
-                                <th scope="col" class="font-weight-light">Destination</th>
-                                <th scope="col" class="font-weight-light">Frequency (minutes)</th>
-                                <th scope="col" class="font-weight-light">Next Arrival</th>
-                                <th scope="col" class="font-weight-light">Minutes Away</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-sm-1">
-            </div>
-        </div>
+        <div class="col-sm-1"></div>
+      </div>
     </div>
     <div class="row">
-        <div class="col-sm-1">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <div class="card">
+          <div class="card-header bg-info text-light font-weight-bold">
+            Add a Train
+          </div>
+          <div class="card-body">
+            <form role="form" id="form">
+              <div class="form-group">
+                <label for="train">Train Name</label>
+                <input type="text" class="form-control" id="train" />
+              </div>
+              <div class="form-group">
+                <label for="destination">Destination</label>
+                <input type="text" class="form-control" id="destination" />
+              </div>
+              <div class="form-group">
+                <label for="start">First Train Time</label>
+                <input
+                  type="time"
+                  class="form-control"
+                  id="start"
+                  min="00:00:00"
+                  max="23:59:59"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="frequency">Frequency in Minutes</label>
+                <input
+                  type="number"
+                  name="frequency"
+                  min="1"
+                  max="60"
+                  class="form-control"
+                  id="frequency"
+                />
+              </div>
+              <button type="submit" id="go" class="btn">Submit</button>
+            </form>
+          </div>
         </div>
-        <div class="col-sm-10">
-            <div class="card">
-                <div class="card-header bg-info text-light font-weight-bold">Add a Train</div>
-                <div class="card-body">
-                    <form role="form" id="form">
-                        <div class="form-group">
-                            <label for="train">Train Name</label>
-                            <input type="text" class="form-control" id="train">
-                        </div>
-                        <div class="form-group">
-                            <label for="destination">Destination</label>
-                            <input type="text" class="form-control" id="destination">
-                        </div>
-                        <div class="form-group">
-                            <label for="start">First Train Time</label>
-                            <input type="time" class="form-control" id="start" min="00:00:00" max="23:59:59" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="frequency">Frequency</label>
-                            <input type="text" class="form-control" id="frequency">
-                        </div>
-                        <button type="submit" id="go" class="btn">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-1">
-        </div>
+      </div>
+      <div class="col-sm-1"></div>
     </div>
 
     <script src="assets/javascript/choochoo.js"></script>
-
-
-</body>
-
+  </body>
 </html>
